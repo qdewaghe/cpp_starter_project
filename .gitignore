@@ -18,3 +18,9 @@ graph_info\.json
 *.user
 *.filters
 *.cmake
+
+
+#emacs
+.\#*
+.projectile
+*~
