@@ -1,0 +1,20 @@
+#folders
+\.vscode/
+\.vs/
+obj/
+bin/
+
+#specific files
+Makefile
+conanbuildinfo\.lua
+conanbuildinfo\.txt
+conaninfo\.txt
+graph_info\.json
+
+#file extensions
+*.make
+*.sln
+*.vcxproj
+*.user
+*.filters
+*.cmake
