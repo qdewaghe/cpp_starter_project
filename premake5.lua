@@ -25,11 +25,6 @@ project  (project_name)
     links           { conan_libs }
     linkoptions     { conan_exelinkflags }
 
-    postbuildcommands { 
-        "{COPY} ./pch.cxx ../include", 
-        "{COPY} ./pch.hpp ../include" 
-    }
-
 
     files { 
         "src/**.hpp", "src/**.h", 
@@ -48,20 +43,10 @@ project  (project_name)
         systemversion "latest"
         entrypoint "mainCRTStartup"
         defines { "_WIN32_WINNT=0x0501" }
-        
-        
 
     filter "action:vs*"
         -- disables bugged warning in vs https://github.com/chriskohlhoff/asio/issues/290#issuecomment-377727614
         defines { "_SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING" }
-        pchheader   "pch.hpp"
-        pchsource   "src/pch.cxx"
-        includedirs { ".", "src" } 
-
-    filter "action:not vs*"
-        includedirs     "include/"
-        pchheader       "pch.hpp"
-        pchsource       "include/pch.cxx" 
 
 
 project "tests"

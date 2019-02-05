@@ -1,5 +1,5 @@
-#include "pch.hpp"
-#include "test/test.hpp"
+#include <iostream>
+#include <fmt/format.h> 
 
 #include <boost/asio.hpp>
 
@@ -11,8 +11,8 @@ auto main() -> int
 
    t.wait();
 
+   
    std::cout << fmt::format("{}", "test");
 }
-
 
 
