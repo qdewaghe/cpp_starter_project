@@ -3,6 +3,7 @@
 \.vs/
 obj/
 bin/
+\.cquery_cached_index
 
 #specific files
 Makefile
@@ -10,6 +11,8 @@ conanbuildinfo\.lua
 conanbuildinfo\.txt
 conaninfo\.txt
 graph_info\.json
+compile_commands.json
+
 
 #file extensions
 *.make
