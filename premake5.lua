@@ -1,13 +1,13 @@
-premake.path    = premake.path .. ";" .. "vendor/conan"
 cwd             = os.getcwd()
 project_name    = path.rebase("./", cwd, path.getdirectory(cwd))
 
-require "conanbuildinfo"
+include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
 
 workspace (project_name)
     architecture    "x64"
     configurations { "debug", "release" }
-
+    conan_basic_setup()
+    
 project  (project_name)
 
     kind            "ConsoleApp"
