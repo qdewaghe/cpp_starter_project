@@ -6,7 +6,6 @@ include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
 workspace (project_name)
     architecture    "x64"
     configurations { "debug", "release" }
-    conan_basic_setup()
     
 project  (project_name)
 
@@ -18,14 +17,13 @@ project  (project_name)
     objdir          "build/obj/%{cfg.buildcfg}"
     warnings        "Extra"  
     staticruntime   "On"
-    
 
+    
     includedirs     { conan_includedirs }
     libdirs         { conan_libdirs }
     links           { conan_libs }
     linkoptions     { conan_exelinkflags }
-
-
+    
     files { 
         "src/**.hpp", "src/**.h", 
         "src/**.cxx", "src/**.cpp" 

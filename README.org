@@ -1,0 +1,24 @@
+* c++ starter project
+This is a starter project using [[https://github.com/premake/premake-core][premake5]] and [[https://github.com/conan-io/conan][conan]].
+It includes [[https://www.boost.org/][boost]], [[https://github.com/fmtlib/fmt][fmt]], and [[https://github.com/catchorg/Catch2][catch2]] for tests by default.
+
+Premake will use the name of the folder to name the project and the executable.
+One project is created for src/, and another one for tests/
+
+** How to use
+#+BEGIN_SRC sh
+  git clone https://github.com/qdewaghe/cpp_starter_project
+  cd cpp_starter_project
+  rm README.org
+  sudo apt-get update
+  sudo apt install python3-pip
+  sudo pip install --upgrade conan
+  conan user
+  cd ./vendor/conan
+  conan install . --build missing --pr linux.txt
+  cd ../..
+  #rename the folder here if you want the project to have another name
+  ./vendor/premake/premake5 gmake
+  make
+#+END_SRC
+    
