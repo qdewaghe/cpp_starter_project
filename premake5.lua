@@ -18,12 +18,15 @@ project  (project_name)
     warnings        "Extra"  
     staticruntime   "On"
 
+<<<<<<< HEAD
     
     includedirs     { conan_includedirs }
     libdirs         { conan_libdirs }
     links           { conan_libs }
     linkoptions     { conan_exelinkflags }
     
+=======
+>>>>>>> afb0dcc4d46b9610885da32f6e9fb1b95d884683
     files { 
         "src/**.hpp", "src/**.h", 
         "src/**.cxx", "src/**.cpp" 
@@ -56,9 +59,6 @@ project "tests"
     objdir          "build/obj/%{cfg.buildcfg}/tests"
     warnings        "Extra"  
     staticruntime   "On"
-
-    includedirs     { conan_includedirs_Catch2 }
-    libdirs         { conan_libdirs_Catch2 }
 
     files { 
         "tests/**.hpp", "tests/**.h", 

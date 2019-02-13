@@ -2,7 +2,6 @@
 #include <fmt/format.h>
 #include <boost/asio.hpp>
 
-
 auto main() -> int
 {
    //makes sure boost is properly linked
