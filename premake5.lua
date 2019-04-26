@@ -6,7 +6,11 @@ include(cwd .. "/vendor/conan/conanbuildinfo.lua")
 workspace (project_name)
     architecture    "x64"
     configurations { "debug", "release" }
-    conan_basic_setup()
+    
+    includedirs     { conan_includedirs }
+    libdirs         { conan_libdirs }
+    links           { conan_libs }
+    linkoptions     { conan_exelinkflags }
     
 project  (project_name)
 
@@ -51,6 +55,7 @@ project "tests"
     objdir          "build/obj/%{cfg.buildcfg}/tests"
     warnings        "Extra"  
     staticruntime   "On"
+    
 
     files { 
         "tests/**.hpp", "tests/**.h", 
