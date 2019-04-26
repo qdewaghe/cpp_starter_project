@@ -1,7 +1,7 @@
 cwd             = os.getcwd()
 project_name    = path.rebase("./", cwd, path.getdirectory(cwd))
 
-include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
+include(cwd .. "/vendor/conan/conanbuildinfo.lua")
 
 workspace (project_name)
     architecture    "x64"

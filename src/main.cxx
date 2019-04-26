@@ -8,7 +8,8 @@ auto main() -> int
    boost::asio::deadline_timer t(io, boost::posix_time::microseconds(1));
    
    t.wait();
-   std::cout << fmt::format("{}", "test");
+   
+   std::cout << fmt::format("{}", "test1");
 }
 
 
