@@ -4,8 +4,7 @@ project_name    = path.rebase("./", cwd, path.getdirectory(cwd))
 include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
 
 workspace (project_name)
-    architecture    "x64"
-    configurations { "debug", "release" }
+    conan_basic_setup()
     
 project  (project_name)
 
@@ -18,35 +17,35 @@ project  (project_name)
     warnings        "Extra"  
     staticruntime   "On"
 
-        
-    includedirs     { conan_includedirs }
-    libdirs         { conan_libdirs }
-    links           { conan_libs }
-    linkoptions     { conan_exelinkflags }
-
     files { 
         "src/**.hpp", "src/**.h", 
         "src/**.cxx", "src/**.cpp" 
     }
 
-    filter "configurations:debug"
+    filter { "configurations:debug" }
         defines { "DEBUG", conan_cppdefines }
         symbols "On"
 
-    filter "configurations:release"
+    filter { "configurations:release" }
         defines { "NDEBUG", conan_cppdefines }
-        optimize "On"  
+        optimize "On"
 
+    filter {"configurations:linux64"}
+	architecture "x64"
+	system "linux"
+
+    filter {"configurations:win64"}
+	architecture "x64"
+	system "windows"
+
+    filter {"configurations:linux_arm"}
+	architecture "arm"
+	system "linux"
+	
     filter "system:windows"
         systemversion "latest"
         entrypoint "mainCRTStartup"
-        defines { "_WIN32_WINNT=0x0501" }
-
-    filter "action:vs*"
-        -- disables bugged warning in vs https://github.com/chriskohlhoff/asio/issues/290#issuecomment-377727614
-        defines { "_SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING" }
-
-
+	
 project "tests"
     kind            "ConsoleApp"
     location        "tests/"
@@ -54,13 +53,16 @@ project "tests"
     cppdialect      "C++17"
     targetdir       "build/bin/%{cfg.buildcfg}/tests"
     objdir          "build/obj/%{cfg.buildcfg}/tests"
-    warnings        "Extra"  
-    staticruntime   "On"
-
-    includedirs     { conan_includedirs_Catch2, "src/" }
-    libdirs         { conan_libdirs_Catch2 }
-     
+    warnings        "Extra"
+    includedirs     { "src/", "include/"}
+    
     files { 
         "tests/**.hpp", "tests/**.h", 
-        "tests/**.cxx", "tests/**.cpp" 
+        "tests/**.cxx", "tests/**.cpp",
+	"src/**.cpp", "src/**.hpp",
+	"src/**.h"
+    }
+
+    postbuildcommands {
+       "../build/bin/%{cfg.buildcfg}/tests"
     }
