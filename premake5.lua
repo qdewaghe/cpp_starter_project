@@ -1,7 +1,7 @@
 cwd             = os.getcwd()
 project_name    = path.rebase("./", cwd, path.getdirectory(cwd))
 
-include(cwd .. "/vendor/conan/conanbuildinfo.lua")
+include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
 
 workspace (project_name)
     conan_basic_setup()
@@ -14,7 +14,6 @@ workspace (project_name)
     linkoptions     { conan_exelinkflags }
     
 project  (project_name)
-
     kind            "ConsoleApp"
     location        "src/"
     language        "C++"
