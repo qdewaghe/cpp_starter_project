@@ -8,11 +8,6 @@ workspace (project_name)
     architecture    "x64"
     configurations { "debug", "release" }
     
-    includedirs     { conan_includedirs }
-    libdirs         { conan_libdirs }
-    links           { conan_libs }
-    linkoptions     { conan_exelinkflags }
-    
 project  (project_name)
     kind            "ConsoleApp"
     location        "src/"
