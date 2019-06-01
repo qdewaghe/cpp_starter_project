@@ -5,8 +5,6 @@ include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
 
 workspace (project_name)
     conan_basic_setup()
-    architecture    "x64"
-    configurations { "debug", "release" }
     
 project  (project_name)
     kind            "ConsoleApp"
