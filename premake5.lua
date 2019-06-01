@@ -1,10 +1,17 @@
 cwd             = os.getcwd()
 project_name    = path.rebase("./", cwd, path.getdirectory(cwd))
 
-include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
+include(cwd .. "/vendor/conan/conanbuildinfo.lua")
 
 workspace (project_name)
     conan_basic_setup()
+    architecture    "x64"
+    configurations { "debug", "release" }
+    
+    includedirs     { conan_includedirs }
+    libdirs         { conan_libdirs }
+    links           { conan_libs }
+    linkoptions     { conan_exelinkflags }
     
 project  (project_name)
 
@@ -53,8 +60,8 @@ project "tests"
     cppdialect      "C++17"
     targetdir       "build/bin/%{cfg.buildcfg}/tests"
     objdir          "build/obj/%{cfg.buildcfg}/tests"
-    warnings        "Extra"
-    includedirs     { "src/", "include/"}
+    warnings        "Extra"  
+    staticruntime   "On"
     
     files { 
         "tests/**.hpp", "tests/**.h", 
