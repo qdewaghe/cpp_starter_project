@@ -15,33 +15,22 @@ project  (project_name)
     objdir          "build/obj/%{cfg.buildcfg}"
     warnings        "Extra"  
     staticruntime   "On"
-
+    includedirs     "include"
+    
     files { 
         "src/**.hpp", "src/**.h", 
         "src/**.cxx", "src/**.cpp" 
     }
 
     filter { "configurations:debug" }
-        defines { "DEBUG", conan_cppdefines }
+        defines { "DEBUG" }
         symbols "On"
 
     filter { "configurations:release" }
-        defines { "NDEBUG", conan_cppdefines }
+        defines { "NDEBUG" }
         optimize "On"
 
-    filter {"configurations:linux64"}
-	architecture "x64"
-	system "linux"
-
-    filter {"configurations:win64"}
-	architecture "x64"
-	system "windows"
-
-    filter {"configurations:linux_arm"}
-	architecture "arm"
-	system "linux"
-	
-    filter "system:windows"
+    filter { "system:windows" }
         systemversion "latest"
         entrypoint "mainCRTStartup"
 	

@@ -11,7 +11,6 @@ auto main() -> int
    t.wait();
 
    std::cout << fmt::format("{}", "Hello, World!");
-
 }
 
 
