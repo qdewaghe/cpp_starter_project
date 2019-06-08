@@ -1,0 +1,32 @@
+Language: Cpp
+DerivePointerAlignment: false
+PointerAlignment: Left
+IndentWidth: 3
+UseTab: Never
+IndentCaseLabels: true
+AllowShortCaseLabelsOnASingleLine: true
+ColumnLimit: 80
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignOperands: true
+AllowAllConstructorInitializersOnNextLine: true
+BreakStringLiterals: true
+SortIncludes: true
+SpaceAfterTemplateKeyword: false
+AlwaysBreakTemplateDeclarations: true
+
+
+# BRACES
+BreakBeforeBraces: Custom
+BraceWrapping:
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+  AfterEnum: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterClass: true
+  AfterControlStatement: true
+  AfterNamespace: false
+  AfterFunction: true
+  AfterExternBlock: true
