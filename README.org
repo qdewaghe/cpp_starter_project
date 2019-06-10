@@ -14,11 +14,11 @@ One project is created for src/, and another one for tests/
   sudo apt install python3-pip
   sudo pip install --upgrade conan
   conan user
-  cd ./vendor/conan
+  cd ./conan
   conan install . --build missing --pr linux.txt
-  cd ../..
+  cd ..
   #rename the folder here if you want the project to have another name
-  ./vendor/premake/premake5 gmake
+  ./tools/premake5 gmake
   make
 #+END_SRC
     
