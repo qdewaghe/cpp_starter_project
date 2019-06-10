@@ -12,6 +12,7 @@ workspace (project_name)
     objdir          "obj/"
     warnings        "Extra"
     includedirs     "include"
+   
 	
     filter { "configurations:debug" }
         defines { "DEBUG" }
@@ -28,23 +29,23 @@ workspace (project_name)
 
 project  (project_lib)
     kind      "StaticLib"
-    location  "src/"
     targetdir "bin/%{cfg.buildcfg}/lib"
     files     "src/**.cpp"
+    location  "build"
     
 project  (project_name)
     kind      "ConsoleApp"
-    location  "src/"
     targetdir "bin/%{cfg.buildcfg}"
     links     (project_lib)
     files     "src/**.cxx"
+    location  "build"
     
 project "tests"
     kind      "ConsoleApp"
-    location  "tests/"
     targetdir "bin/%{cfg.buildcfg}"
     links     (project_lib)
     files     { "tests/**.cxx", "tests/**.cpp" }
+    location  "build"
 
     postbuildcommands {
        "../bin/%{cfg.buildcfg}/tests"
