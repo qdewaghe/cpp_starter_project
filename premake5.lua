@@ -12,7 +12,6 @@ workspace (project_name)
     objdir      "obj/"
     warnings    "Extra"
     includedirs "include"
-   
 	
     filter { "configurations:debug" }
         defines  "DEBUG"
@@ -21,7 +20,7 @@ workspace (project_name)
 
     filter { "configurations:release" }
         defines  "NDEBUG"
-	symbols  "OFF"
+	symbols  "Off"
         optimize "Full"
 
     filter { "system:windows" }
