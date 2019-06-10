@@ -7,25 +7,26 @@ include(cwd .. "/conan/conanbuildinfo.premake.lua")
 workspace (project_name)
     conan_basic_setup()
 
-    language        "C++"
-    cppdialect      "C++17"
-    objdir          "obj/"
-    warnings        "Extra"
-    includedirs     "include"
+    language    "C++"
+    cppdialect  "C++17"
+    objdir      "obj/"
+    warnings    "Extra"
+    includedirs "include"
    
 	
     filter { "configurations:debug" }
-        defines { "DEBUG" }
-        symbols "On"
+        defines  "DEBUG"
+        symbols  "On"
 	optimize "Off"
 
     filter { "configurations:release" }
-        defines { "NDEBUG" }
+        defines  "NDEBUG"
+	symbols  "OFF"
         optimize "Full"
 
     filter { "system:windows" }
         systemversion "latest"
-        entrypoint "mainCRTStartup"
+        entrypoint    "mainCRTStartup"
 
 project  (project_lib)
     kind      "StaticLib"
