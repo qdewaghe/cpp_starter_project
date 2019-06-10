@@ -1,56 +1,51 @@
 cwd             = os.getcwd()
 project_name    = path.rebase("./", cwd, path.getdirectory(cwd))
+project_lib     = (project_name .. "_lib")
 
-include(cwd .. "/vendor/conan/conanbuildinfo.premake.lua")
+include(cwd .. "/conan/conanbuildinfo.premake.lua")
 
 workspace (project_name)
     conan_basic_setup()
-    
-project  (project_name)
-    kind            "ConsoleApp"
-    location        "src/"
+
     language        "C++"
     cppdialect      "C++17"
-    targetdir       "build/bin/%{cfg.buildcfg}"
-    objdir          "build/obj/%{cfg.buildcfg}"
-    warnings        "Extra"  
-    staticruntime   "On"
+    objdir          "obj/"
+    warnings        "Extra"
     includedirs     "include"
-    
-    files { 
-        "src/**.hpp", "src/**.h", 
-        "src/**.cxx", "src/**.cpp" 
-    }
-
+	
     filter { "configurations:debug" }
         defines { "DEBUG" }
         symbols "On"
+	optimize "Off"
 
     filter { "configurations:release" }
         defines { "NDEBUG" }
-        optimize "On"
+        optimize "Full"
 
     filter { "system:windows" }
         systemversion "latest"
         entrypoint "mainCRTStartup"
-	
-project "tests"
-    kind            "ConsoleApp"
-    location        "tests/"
-    language        "C++"
-    cppdialect      "C++17"
-    targetdir       "build/bin/%{cfg.buildcfg}"
-    objdir          "build/obj/%{cfg.buildcfg}"
-    warnings        "Extra"  
-    staticruntime   "On"
+
+project  (project_lib)
+    kind      "StaticLib"
+    location  "src/"
+    targetdir "bin/%{cfg.buildcfg}/lib"
+    files     "src/**.cpp"
     
-    files { 
-        "tests/**.hpp", "tests/**.h", 
-        "tests/**.cxx", "tests/**.cpp",
-	"src/**.cpp", "src/**.hpp",
-	"src/**.h"
-    }
+project  (project_name)
+    kind      "ConsoleApp"
+    location  "src/"
+    targetdir "bin/%{cfg.buildcfg}"
+    links     (project_lib)
+    files     "src/**.cxx"
+    
+project "tests"
+    kind      "ConsoleApp"
+    location  "tests/"
+    targetdir "bin/%{cfg.buildcfg}"
+    links     (project_lib)
+    files     { "tests/**.cxx", "tests/**.cpp" }
 
     postbuildcommands {
-       "../build/bin/%{cfg.buildcfg}/tests"
+       "../bin/%{cfg.buildcfg}/tests"
     }
