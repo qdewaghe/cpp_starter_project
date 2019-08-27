@@ -1,23 +1,18 @@
-#include <boost/asio.hpp>
 #include <fmt/format.h>
-#include <iostream>
-#include <optional>
+
+#include "example.hpp"
+
+#ifndef NDEBUG
+constexpr auto build_type = "debug";
+#else
+constexpr auto build_type = "release";
+#endif
 
 auto main() -> int
 {
-   // makes sure boost is properly linked
-   boost::asio::io_context     io;
-   boost::asio::deadline_timer t(io, boost::posix_time::microseconds(1));
+  const int current_year{2019};
 
-   t.wait();
-
-   std::cout << fmt::format("{}\n", "Hello, World!");
-
-#ifdef DEBUG
-   std::cout << "debug" << std::endl;
-#endif
-
-#ifdef NDEBUG
-   std::cout << "release" << std::endl;
-#endif
+  fmt::print("Test: {}\nBuild type: {}\n",
+             my_app::year_to_century(current_year),
+             build_type);
 }

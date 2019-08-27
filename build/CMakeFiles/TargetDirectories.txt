@@ -1,0 +1,14 @@
+/home/quentin/code/cmake_starter/build/CMakeFiles/rebuild_cache.dir
+/home/quentin/code/cmake_starter/build/CMakeFiles/edit_cache.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/rebuild_cache.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/edit_cache.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/cmake_starter.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/cmake_starter_lib.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/cmake_starter_clangformat.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/cmake_starter_lib_clangformat.dir
+/home/quentin/code/cmake_starter/build/src/CMakeFiles/clangformat.dir
+/home/quentin/code/cmake_starter/build/tests/CMakeFiles/edit_cache.dir
+/home/quentin/code/cmake_starter/build/tests/CMakeFiles/cmake_starter_tests_clangformat.dir
+/home/quentin/code/cmake_starter/build/tests/CMakeFiles/rebuild_cache.dir
+/home/quentin/code/cmake_starter/build/tests/CMakeFiles/cmake_starter_tests.dir
+/home/quentin/code/cmake_starter/build/tests/CMakeFiles/run_tests.dir

@@ -1,0 +1,11 @@
+[generators]
+cmake
+
+[requires]
+fmt/5.3.0@bincrafters/stable
+boost/1.71.0@conan/stable
+doctest/2.3.1@bincrafters/stable
+
+[options]
+
+[imports]

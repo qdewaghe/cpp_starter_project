@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+389518f712406dbf96d3738ff0116bc4 src/CMakeFiles/clangformat
+792eba221f8a9ea70d260923ae712856 src/CMakeFiles/cmake_starter_clangformat
+6ee260fc5badf6bd826913adb36abef0 src/CMakeFiles/cmake_starter_lib_clangformat
+7fb97b03a1c6cb4eb3f4314604455add tests/CMakeFiles/cmake_starter_tests_clangformat
+20089b87d2a07e41b71e0670c7b6bc16 tests/CMakeFiles/run_tests
+a2ea7201d1b6a5ae29101d68f51bd160 tests/tests.lic
