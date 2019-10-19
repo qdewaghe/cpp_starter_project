@@ -1,6 +1,12 @@
 # Need at least 3.12 for globbing
 cmake_minimum_required(VERSION 3.12...3.15)
 
+if(${CMAKE_VERSION} VERSION_LESS 3.15)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+    cmake_policy(VERSION 3.15)
+endif()
+
 # Renames the project based on the root folder's name 
 get_filename_component(project_name
   ${CMAKE_CURRENT_SOURCE_DIR} NAME)
@@ -25,7 +31,7 @@ endif()
 
 # Import a module to handle clang format
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-include(ClangFormat)
+include(clangformat)
 
 #Download conan cmake module and include it
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
@@ -61,7 +67,6 @@ endif()
 
 include(${CMAKE_SOURCE_DIR}/cmake/clang-tidy.cmake)
 
-# Properties
 set_target_properties(
   ${project_name}
   ${project_lib}

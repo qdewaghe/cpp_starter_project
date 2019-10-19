@@ -8,6 +8,13 @@ constexpr auto build_type = "debug";
 constexpr auto build_type = "release";
 #endif
 
+struct Base {
+   virtual void reimplementMe(int a) {}
+};
+struct Derived : public Base  {
+   virtual void reimplementMe(int a) {}
+};
+
 auto main() -> int
 {
   const int current_year{2019};
