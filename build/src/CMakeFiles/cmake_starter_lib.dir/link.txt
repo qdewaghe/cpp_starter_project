@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../lib/libcmake_starter_lib.a  CMakeFiles/cmake_starter_lib.dir/example.cpp.o
-/usr/bin/ranlib ../lib/libcmake_starter_lib.a

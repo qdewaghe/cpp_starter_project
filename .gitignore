@@ -5,6 +5,7 @@ obj/
 bin/
 \.cquery_cached_index
 \.ccls-cache
+build/
 
 #specific files
 Makefile
@@ -26,6 +27,11 @@ compile_commands.json
 *.ccls-root
 
 #emacs
-.\#*
-.projectile
 *~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
