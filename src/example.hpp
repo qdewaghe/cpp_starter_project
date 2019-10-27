@@ -2,6 +2,6 @@
 
 namespace my_app {
 
-int year_to_century(int year);
+  auto year_to_century(int year) -> int;
 
 } // namespace my_app

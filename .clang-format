@@ -1,11 +1,14 @@
 Language: Cpp
 DerivePointerAlignment: false
 PointerAlignment: Left
-IndentWidth: 3
+IndentWidth: 2
 UseTab: Never
 IndentCaseLabels: true
 AllowShortCaseLabelsOnASingleLine: true
+BinPackArguments: false
+AllowAllArgumentsOnNextLine: false
 ColumnLimit: 80
+AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
 AlignOperands: true
@@ -14,7 +17,7 @@ BreakStringLiterals: true
 SortIncludes: true
 SpaceAfterTemplateKeyword: false
 AlwaysBreakTemplateDeclarations: true
-
+IndentPPDirectives: BeforeHash
 
 # BRACES
 BreakBeforeBraces: Custom
