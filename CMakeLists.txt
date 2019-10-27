@@ -5,7 +5,7 @@ if(${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 else()
     cmake_policy(VERSION 3.15)
-endif()
+  endif()
 
 # Renames the project based on the root folder's name 
 get_filename_component(project_name
@@ -17,6 +17,9 @@ set(project_tests ${project_name}_tests)
 
 # Generates compile_commands.json for LSP
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+#can't use llvm otherwise
+add_compile_options(-fno-rtti)
 
 project(${project_name}
   VERSION 0.0.1
@@ -33,8 +36,19 @@ endif()
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(clangformat)
 
+find_package(LLVM REQUIRED CONFIG)
+find_package(Clang REQUIRED CONFIG)
+
+message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+
+include_directories(${LLVM_INCLUDE_DIRS})
+add_definitions(${LLVM_DEFINITIONS})
+
+llvm_map_components_to_libnames(llvm_libs support core irreader)
+
 #Download conan cmake module and include it
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
     "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
@@ -74,5 +88,7 @@ set_target_properties(
   PROPERTIES
   CXX_STANDARD 17
   CXX_STANDARD_REQUIRED ON
-  CXX_CLANG_TIDY "${clang_tidy_call}")
+  #CXX_CLANG_TIDY "${clang_tidy_call}"
+  )
 
+set(LLVM_LINK_COMPONENTS support)

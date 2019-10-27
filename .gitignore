@@ -10,11 +10,6 @@ build/
 
 #specific files
 Makefile
-vendor/conan/conanbuildinfo\.lua
-vendor/conan/conanbuildinfo\.txt
-vendor/conan/conanbuildinfo.premake.lua
-vendor/conan/conaninfo\.txt
-vendor/conan/graph_info\.json
 compile_commands.json
 
 
