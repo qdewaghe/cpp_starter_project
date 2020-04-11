@@ -18,6 +18,6 @@ target_include_directories(
   ${project_name}
   PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
-target_clangformat(${project_name})
-target_clangformat(${project_lib})
+#target_clangformat(${project_name})
+#target_clangformat(${project_lib})
 
