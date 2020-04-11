@@ -19,4 +19,3 @@ add_custom_command(
 
 add_custom_target(run_tests ALL DEPENDS tests.lic ${project_name})
 
-#target_clangformat(${project_tests})

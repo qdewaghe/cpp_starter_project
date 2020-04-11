@@ -10,5 +10,5 @@ auto my_app::year_to_century(int const year) -> int
   int const years_in_century = 100;
   int const round_up         = 100 - 1;
 
-  return (year + round_up) / years_in_century;  
+  return (year + round_up) / years_in_century;
 }

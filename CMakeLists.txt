@@ -9,7 +9,7 @@ string(REPLACE " " "_" project_name ${project_name})
 set(project_lib ${project_name}_lib)
 set(project_tests ${project_name}_tests)
 
-# Generates compile_commands.json for LSP
+# Generates compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(${project_name}
@@ -25,7 +25,6 @@ endif()
 
 # Import a module to handle clang format
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-# include(ClangFormat)
 
 #Download conan cmake module and include it
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
@@ -57,9 +56,7 @@ else()
     elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
        add_compile_options (-fcolor-diagnostics)
     endif ()
-endif(
-
-include(${CMAKE_SOURCE_DIR}/cmake/clang-tidy.cmake)
+endif()
 
 # Properties
 set_target_properties(
@@ -68,6 +65,5 @@ set_target_properties(
   ${project_tests}
   PROPERTIES
   CXX_STANDARD 17
-  CXX_STANDARD_REQUIRED ON
-  CXX_CLANG_TIDY "${clang_tidy_call}")
+  CXX_STANDARD_REQUIRED ON)
 

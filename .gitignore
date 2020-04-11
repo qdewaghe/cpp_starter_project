@@ -13,7 +13,7 @@ vendor/conan/conanbuildinfo\.txt
 vendor/conan/conaninfo\.txt
 vendor/conan/graph_info\.json
 compile_commands.json
-
+cmake/conan.cmake
 
 #file extensions
 *.make
@@ -21,7 +21,6 @@ compile_commands.json
 *.vcxproj
 *.user
 *.filters
-*.cmake
 *.ccls-root
 
 #emacs
