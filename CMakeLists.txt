@@ -1,6 +1,12 @@
 # Need at least 3.12 for globbing
 cmake_minimum_required(VERSION 3.12...3.17)
 
+if(${CMAKE_VERSION} VERSION_LESS 3.15)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+    cmake_policy(VERSION 3.15)
+  endif()
+
 # Renames the project based on the root folder's name 
 get_filename_component(project_name
   ${CMAKE_CURRENT_SOURCE_DIR} NAME)
@@ -27,7 +33,7 @@ endif()
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 #Download conan cmake module and include it
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
     "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
