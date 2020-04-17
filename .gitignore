@@ -5,6 +5,7 @@ obj/
 bin/
 \.cquery_cached_index
 \.ccls-cache
+\.clangd
 build/
 
 #specific files
