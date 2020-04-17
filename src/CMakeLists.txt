@@ -46,6 +46,3 @@ target_include_directories(
   PUBLIC ${CMAKE_SOURCE_DIR}/src
   PUBLIC ${LLVM_INCLUDE_DIRS})
 
-target_clangformat(${project_name})
-target_clangformat(${project_lib})
-

@@ -1,5 +1,5 @@
 # Need at least 3.12 for globbing
-cmake_minimum_required(VERSION 3.12...3.15)
+cmake_minimum_required(VERSION 3.12...3.17)
 
 if(${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
@@ -15,11 +15,8 @@ string(REPLACE " " "_" project_name ${project_name})
 set(project_lib ${project_name}_lib)
 set(project_tests ${project_name}_tests)
 
-# Generates compile_commands.json for LSP
+# Generates compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-#can't use llvm otherwise
-add_compile_options(-fno-rtti)
 
 project(${project_name}
   VERSION 0.0.1
@@ -34,18 +31,6 @@ endif()
 
 # Import a module to handle clang format
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-include(clangformat)
-
-find_package(LLVM REQUIRED CONFIG)
-find_package(Clang REQUIRED CONFIG)
-
-message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
-message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
-
-include_directories(${LLVM_INCLUDE_DIRS})
-add_definitions(${LLVM_DEFINITIONS})
-
-llvm_map_components_to_libnames(llvm_libs support core irreader)
 
 #Download conan cmake module and include it
 if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
@@ -79,16 +64,12 @@ else()
     endif ()
 endif()
 
-include(${CMAKE_SOURCE_DIR}/cmake/clang-tidy.cmake)
-
+# Properties
 set_target_properties(
   ${project_name}
   ${project_lib}
   ${project_tests}
   PROPERTIES
   CXX_STANDARD 17
-  CXX_STANDARD_REQUIRED ON
-  #CXX_CLANG_TIDY "${clang_tidy_call}"
-  )
+  CXX_STANDARD_REQUIRED ON)
 
-set(LLVM_LINK_COMPONENTS support)

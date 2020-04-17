@@ -6,7 +6,6 @@ bin/
 \.cquery_cached_index
 \.ccls-cache
 build/
-.clangd/
 
 #specific files
 Makefile
@@ -19,7 +18,9 @@ compile_commands.json
 *.vcxproj
 *.user
 *.filters
+*.cmake
 *.ccls-root
+*.orig
 
 #emacs
 *~
@@ -30,3 +31,5 @@ compile_commands.json
 auto-save-list
 tramp
 .\#*
+.projectile
+*~
