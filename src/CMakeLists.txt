@@ -14,8 +14,3 @@ target_link_libraries(
   ${project_lib}
   compile_options)
 
-target_include_directories(
-  ${project_name}
-  PUBLIC ${CMAKE_SOURCE_DIR}/src
-  PUBLIC ${LLVM_INCLUDE_DIRS})
-
