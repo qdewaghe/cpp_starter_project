@@ -1,11 +1,5 @@
 # Need at least 3.12 for globbing
-cmake_minimum_required(VERSION 3.12...3.17)
-
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
-    cmake_policy(VERSION 3.15)
-  endif()
+cmake_minimum_required(VERSION 3.18)
 
 # Renames the project based on the root folder's name 
 get_filename_component(project_name
