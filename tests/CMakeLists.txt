@@ -1,7 +1,4 @@
-file(GLOB_RECURSE tests_files
-  CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/tests/*.cpp)
-
-add_executable(${project_tests} ${tests_files})
+add_executable(${project_tests} main.cpp test.cpp)
 
 target_link_libraries(
   ${project_tests}

@@ -1,6 +1,6 @@
 #include <fmt/format.h>
 
-#include "example.hpp"
+#include "example/example.hpp"
 
 #ifndef NDEBUG
 constexpr auto build_type = "debug";
