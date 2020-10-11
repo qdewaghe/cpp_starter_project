@@ -42,16 +42,16 @@ conan_cmake_run(
   BASIC_SETUP
   BUILD missing)
 
-add_subdirectory(src)
-add_subdirectory(tests)
-
 message(STATUS "Compiler id : " ${CMAKE_CXX_COMPILER_ID})
 
-add_library(compile_options INTERFACE)
-target_compile_options(compile_options
+add_library(warning_options INTERFACE)
+target_compile_options(warning_options
   INTERFACE
   $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic>)
+
+add_subdirectory(src)
+add_subdirectory(tests)
 
 set_target_properties(
   ${project_name}

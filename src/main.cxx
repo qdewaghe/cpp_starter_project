@@ -8,8 +8,7 @@ constexpr auto build_type = "debug";
 constexpr auto build_type = "release";
 #endif
 
-
-auto main(int argc, const char** argv) -> int
+auto main() -> int
 {
   const int current_year{2020};
 

@@ -12,5 +12,5 @@ target_link_libraries(
   PRIVATE 
   ${CONAN_LIBS}
   ${project_lib}
-  compile_options)
+  warning_options)
 
