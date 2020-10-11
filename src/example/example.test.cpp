@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 
-#include "example/example.hpp"
+#include "example.hpp"
 
 TEST_CASE("year to century function")
 {

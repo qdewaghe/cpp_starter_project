@@ -7,7 +7,8 @@ get_filename_component(project_name
 
 string(REPLACE " " "_" project_name ${project_name})
 set(project_lib ${project_name}_lib)
-set(project_tests ${project_name}_tests)
+set(unit_tests ${project_name}_unit_tests)
+set(ntegration_tests ${project_name}_integration_tests)
 
 # Generates compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -56,7 +57,8 @@ add_subdirectory(tests)
 set_target_properties(
   ${project_name}
   ${project_lib}
-  ${project_tests}
+  ${unit_tests}
+  ${integration_tests}
   PROPERTIES
   CXX_STANDARD 17
   CXX_STANDARD_REQUIRED ON)

@@ -1,21 +1,24 @@
-add_executable(${project_tests} main.cpp test.cpp)
+add_executable(${ntegration_tests} main.cpp)
 
 target_link_libraries(
-  ${project_tests}
+  ${ntegration_tests}
   PRIVATE 
   ${CONAN_LIBS}
   ${project_lib}
   warning_options)
 
 target_include_directories(
-  ${project_tests}
+  ${ntegration_tests}
   PRIVATE 
   ${CMAKE_SOURCE_DIR}/src)
 
 add_custom_command(
-  OUTPUT tests.lic
-  COMMAND ${project_tests}
-  COMMENT "Running unit tests")
+  OUTPUT integration_tests.lic
+  COMMAND ${ntegration_tests}
+  COMMENT "Running integration tests")
 
-add_custom_target(run_tests ALL DEPENDS tests.lic ${project_name})
+add_custom_target(run_integration_tests 
+  ALL DEPENDS 
+  integration_tests.lic 
+  ${project_name})
 
