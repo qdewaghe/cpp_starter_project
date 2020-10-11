@@ -46,17 +46,13 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 message(STATUS "Compiler id : " ${CMAKE_CXX_COMPILER_ID})
-# Warnings
-target_compile_options(
-  ${project_name}
-  ${project_lib}
-  ${project_tests} 
-  PRIVATE
-  $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
-  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror>
-)
 
-# Properties
+add_library(compile_options INTERFACE)
+target_compile_options(compile_options
+  INTERFACE
+  $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic>)
+
 set_target_properties(
   ${project_name}
   ${project_lib}
@@ -64,4 +60,3 @@ set_target_properties(
   PROPERTIES
   CXX_STANDARD 17
   CXX_STANDARD_REQUIRED ON)
-

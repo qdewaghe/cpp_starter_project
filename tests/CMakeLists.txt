@@ -5,8 +5,10 @@ add_executable(${project_tests} ${tests_files})
 
 target_link_libraries(
   ${project_tests}
-  PRIVATE ${CONAN_LIBS}
-  PRIVATE ${project_lib})
+  PRIVATE 
+  ${CONAN_LIBS}
+  ${project_lib}
+  compile_options)
 
 target_include_directories(
   ${project_tests}
