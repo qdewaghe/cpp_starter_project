@@ -36,9 +36,9 @@ include(${CMAKE_SOURCE_DIR}/cmake/conan.cmake)
 
 conan_cmake_run(
   REQUIRES
-  fmt/5.3.0@bincrafters/stable
-  boost/1.71.0@conan/stable
-  doctest/2.3.1@bincrafters/stable
+  fmt/7.0.3
+  boost/1.74.0
+  doctest/2.4.0
   BASIC_SETUP
   BUILD missing)
 
@@ -47,16 +47,14 @@ add_subdirectory(tests)
 
 message(STATUS "Compiler id : " ${CMAKE_CXX_COMPILER_ID})
 # Warnings
-if(MSVC)
-  add_compile_options(/W4)
-else()
-  add_compile_options(-Wall -Wextra -pedantic)
-  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-       add_compile_options (-fdiagnostics-color=always)
-    elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-       add_compile_options (-fcolor-diagnostics)
-    endif ()
-endif()
+target_compile_options(
+  ${project_name}
+  ${project_lib}
+  ${project_tests} 
+  PRIVATE
+  $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror>
+)
 
 # Properties
 set_target_properties(
