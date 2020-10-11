@@ -1,0 +1,12 @@
+Checks: >
+  -*,
+  bugprone-*,
+  boost-*,
+  cert-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  hicpp-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  readability-*
