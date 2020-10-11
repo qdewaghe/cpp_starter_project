@@ -1,5 +1,5 @@
 # Need at least 3.12 for globbing
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.17)
 
 # Renames the project based on the root folder's name 
 get_filename_component(project_name
