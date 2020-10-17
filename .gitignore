@@ -1,17 +1,15 @@
 #folders
-\.vscode/
-\.vs/
-obj/
-bin/
-\.cquery_cached_index
-\.ccls-cache
-\.clangd
-build/
+.vscode
+.vs
+.cache
+.cquery_cached_index
+.ccls-cache
+.clangd
+build
 
 #specific files
 Makefile
 compile_commands.json
-
 
 #file extensions
 *.make

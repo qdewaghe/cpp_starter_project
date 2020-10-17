@@ -20,7 +20,7 @@ project(${project_name}
 #if build type isn't specify default to Debug
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
   if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
   endif()
 endif()
 
@@ -60,5 +60,5 @@ set_target_properties(
   ${unit_tests}
   ${integration_tests}
   PROPERTIES
-  CXX_STANDARD 17
+  CXX_STANDARD 20
   CXX_STANDARD_REQUIRED ON)
