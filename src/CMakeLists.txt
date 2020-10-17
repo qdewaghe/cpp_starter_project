@@ -26,7 +26,8 @@ target_link_libraries(
   ${unit_tests}
   PRIVATE 
   ${CONAN_LIBS}
-  ${project_lib})
+  ${project_lib}
+  gcov)
 
 target_include_directories(
   ${unit_tests}

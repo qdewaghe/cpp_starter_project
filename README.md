@@ -1,5 +1,5 @@
 # Build
 - mkdir build
 - cd build
-- cmake ..
-- make -j 32
+- cmake .. -G 
+- make -j \<thread\>

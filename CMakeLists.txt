@@ -8,7 +8,7 @@ get_filename_component(project_name
 string(REPLACE " " "_" project_name ${project_name})
 set(project_lib ${project_name}_lib)
 set(unit_tests ${project_name}_unit_tests)
-set(ntegration_tests ${project_name}_integration_tests)
+set(integration_tests ${project_name}_integration_tests)
 
 # Generates compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -24,16 +24,31 @@ if (NOT EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
   endif()
 endif()
 
-# Import a module to handle clang format
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/CodeCoverage.cmake")
+    message(STATUS "Downloading CodeCoverage.cmake from https://github.com/bilke/cmake-modules")
+    file(DOWNLOAD "https://raw.githubusercontent.com/bilke/cmake-modules/master/CodeCoverage.cmake"
+      "${CMAKE_SOURCE_DIR}/cmake/CodeCoverage.cmake")
+  endif()
 
-#Download conan cmake module and include it
+  set(GCC_COVERAGE_COMPILE_FLAGS "-O0 -coverage -fno-inline -fprofile-dir=./build/")
+  set(GCC_COVERAGE_LINK_FLAGS    "-coverage")
+  set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
+
+
+  include(CodeCoverage)
+  append_coverage_compiler_flags()
+endif()
+
+
 if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
     "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
 endif()
-include(${CMAKE_SOURCE_DIR}/cmake/conan.cmake)
+include(conan)
 
 conan_cmake_run(
   REQUIRES
@@ -62,3 +77,13 @@ set_target_properties(
   PROPERTIES
   CXX_STANDARD 20
   CXX_STANDARD_REQUIRED ON)
+
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  setup_target_for_coverage_lcov(
+    NAME coverage
+    LCOV_ARGS "--no-external"
+    EXECUTABLE ${unit_tests}
+    DEPENDENCIES ${unit_tests}
+    EXCLUDE "src/main.cpp")
+endif()

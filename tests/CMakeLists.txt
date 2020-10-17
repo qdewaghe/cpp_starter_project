@@ -1,14 +1,14 @@
-add_executable(${ntegration_tests} main.cpp)
+add_executable(${integration_tests} main.cpp)
 
 target_link_libraries(
-  ${ntegration_tests}
+  ${integration_tests}
   PRIVATE 
   ${CONAN_LIBS}
   ${project_lib}
   warning_options)
 
 target_include_directories(
-  ${ntegration_tests}
+  ${integration_tests}
   PRIVATE 
   ${CMAKE_SOURCE_DIR}/src)
 
