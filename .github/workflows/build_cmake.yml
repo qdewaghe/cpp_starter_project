@@ -5,28 +5,26 @@ on: [pull_request, push]
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        cxx: [g++-10, clang++-10]
-        build_type: [Debug, Release]
-        os: [ubuntu-18.04]
-        include:
-          - cxx: g++-10
-            os: ubuntu-20.04
-          - cxx: clang++-10
-            os: ubuntu-18.04
+  strategy:
+    matrix:
+      cxx: [g++-10, clang++-10]
+      build_type: [Debug, Release]
+      os: [ubuntu-18.04]
+ 
 	    
-    steps:
+    steps:  
+     - uses: actions/checkout@v2
+     
      - name: Make build directory
-       run: |
-       	    ${{matrix.install}}
-            cmake -E make_directory ${{runner.workspace}}/build
-    - name: Configure
-      working-directory: ${{runner.workspace}}/build
-      env:
+       run: cmake -E make_directory ${{runner.workspace}}/build
+
+     - name: Configure CMake
+       working-directory: ${{runner.workspace}}/build
+       env:
         CXX: ${{matrix.cxx}}
-      run: |
-        cmake -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
-    - name: Build
-      run: cmake --build . --config ${{matrix.build_type}}
+       run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
+       
+     - name: Build
+       working-directory: ${{runner.workspace}}/build
+       run: cmake --build . --config $BUILD_TYPE
 
