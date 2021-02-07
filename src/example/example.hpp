@@ -1,7 +1,7 @@
 #pragma once
 
-namespace my_app {
+namespace example {
 
 auto year_to_century(int year) -> int;
 
-} // namespace my_app
+} // namespace example

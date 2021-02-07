@@ -4,7 +4,7 @@
 
 TEST_CASE("year to century function")
 {
-  using namespace my_app;
+  using example::year_to_century;
 
   REQUIRE(year_to_century(1905) == 20);
   REQUIRE(year_to_century(1700) == 17);

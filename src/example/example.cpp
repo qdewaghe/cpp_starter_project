@@ -1,14 +1,14 @@
 #include "example.hpp"
 
-auto my_app::year_to_century(int const year) -> int
+auto example::year_to_century(int year) -> int
 {
   if (year <= 0)
   {
     return 0;
   }
 
-  int const years_per_century = 100;
-  int const round_up          = 100 - 1;
+  int years_per_century = 100;
+  int round_up          = 100 - 1;
 
-  return (year + round_up) / years_per_century;  
+  return (year + round_up) / years_per_century;
 }

@@ -9,4 +9,6 @@ Checks: >
   misc-*,
   modernize-*,
   performance-*,
-  readability-*
+  readability-*,
+  -cppcoreguidelines-avoid-non-const-global-variables
+  

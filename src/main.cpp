@@ -1,18 +1,14 @@
-#include <fmt/format.h>
+#include <iostream>
+#include <vector>
 
 #include "example/example.hpp"
-
-#ifndef NDEBUG
-constexpr auto build_type = "debug";
-#else
-constexpr auto build_type = "release";
-#endif
+#include "fmt/format.h"
 
 auto main() -> int
 {
-  const int current_year{2020};
+  const auto current_year{2021};
 
-  fmt::print("Test: {}\nBuild type: {}\n",
-             my_app::year_to_century(current_year),
-             build_type);
+  fmt::print("current year: {}\ncurrent century: {}\n",
+             current_year,
+             example::year_to_century(current_year));
 }

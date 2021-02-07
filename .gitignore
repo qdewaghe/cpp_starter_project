@@ -4,8 +4,7 @@
 .cache
 .cquery_cached_index
 .ccls-cache
-.clangd
-build
+build*
 
 #specific files
 Makefile

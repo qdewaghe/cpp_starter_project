@@ -1,89 +1,62 @@
-# Need at least 3.12 for globbing
 cmake_minimum_required(VERSION 3.17)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(utils)
 
-# Renames the project based on the root folder's name 
-get_filename_component(project_name
-  ${CMAKE_CURRENT_SOURCE_DIR} NAME)
-
-string(REPLACE " " "_" project_name ${project_name})
+get_dir_name(project_name ${CMAKE_CURRENT_SOURCE_DIR})
 set(project_lib ${project_name}_lib)
 set(unit_tests ${project_name}_unit_tests)
 set(integration_tests ${project_name}_integration_tests)
 
-# Generates compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(${project_name}
   VERSION 0.0.1
   LANGUAGES CXX)
 
-#if build type isn't specify default to Debug
-if (NOT EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
-  if (NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
-  endif()
-endif()
+include(CTest)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+force_colored_output()
+build_type_if_not_set("Debug")
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/CodeCoverage.cmake")
-    message(STATUS "Downloading CodeCoverage.cmake from https://github.com/bilke/cmake-modules")
-    file(DOWNLOAD "https://raw.githubusercontent.com/bilke/cmake-modules/master/CodeCoverage.cmake"
-      "${CMAKE_SOURCE_DIR}/cmake/CodeCoverage.cmake")
-  endif()
-
-  set(GCC_COVERAGE_COMPILE_FLAGS "-O0 -coverage -fno-inline -fprofile-dir=./build/")
-  set(GCC_COVERAGE_LINK_FLAGS    "-coverage")
-  set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
-
-
-  include(CodeCoverage)
+  code_coverage_mode()
   append_coverage_compiler_flags()
 endif()
 
-
-if(NOT EXISTS "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
-  message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-  file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
-    "${CMAKE_SOURCE_DIR}/cmake/conan.cmake")
-endif()
-include(conan)
+download_include_conan_module()
 
 conan_cmake_run(
   REQUIRES
-  fmt/7.0.3
-  boost/1.74.0
-  doctest/2.4.0
-  BASIC_SETUP
+  fmt/7.1.3
+  doctest/2.4.4
+  BASIC_SETUP CMAKE_TARGETS
   BUILD missing)
 
-message(STATUS "Compiler id : " ${CMAKE_CXX_COMPILER_ID})
+message(STATUS "Compiler id: " ${CMAKE_CXX_COMPILER_ID})
 
-add_library(warning_options INTERFACE)
-target_compile_options(warning_options
+
+add_library(compile_options INTERFACE)
+add_library(main::compile_options ALIAS compile_options)
+
+target_compile_options(compile_options
   INTERFACE
   $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
-  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic>)
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>)
+
+target_compile_features(
+  compile_options
+  INTERFACE
+  cxx_std_20)
+
+force_standard_cpp()
 
 add_subdirectory(src)
 add_subdirectory(tests)
-
-set_target_properties(
-  ${project_name}
-  ${project_lib}
-  ${unit_tests}
-  ${integration_tests}
-  PROPERTIES
-  CXX_STANDARD 20
-  CXX_STANDARD_REQUIRED ON)
-
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   setup_target_for_coverage_lcov(
     NAME coverage
     LCOV_ARGS "--no-external"
     EXECUTABLE ${unit_tests}
-    DEPENDENCIES ${unit_tests}
     EXCLUDE "src/main.cpp")
 endif()
