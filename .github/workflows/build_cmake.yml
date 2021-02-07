@@ -4,14 +4,13 @@ on: [pull_request, push]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-  strategy:
-    matrix:
-      cxx: [g++-10, clang++-10]
-      build_type: [Debug, Release]
-      os: [ubuntu-18.04]
- 
-	    
+    runs-on: ${{ matrix.os }}	
+    strategy:
+      matrix:
+        cxx: [g++-10, clang++-10]
+        build_type: [Debug, Release]
+        os: [ubuntu-18.04]
+     
     steps:  
      - uses: actions/checkout@v2
      
